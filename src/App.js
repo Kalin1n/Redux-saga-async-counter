@@ -1,24 +1,37 @@
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+
+import {toggleAdd, toggleMinus, toggleAddASync, toggleMinusAsync} from "./store/actions"
 
 function App() {
+  const dispatch = useDispatch();
+  const counter = useSelector(state => state.counter);
+
+  const add = () => {
+    dispatch(toggleAdd())
+  };
+
+  const minus = () =>{
+    dispatch(toggleMinus())
+  };
+
+  const addAsync = () => {
+    dispatch(toggleAddASync())
+  };
+
+  const minusAsync = () => {
+    dispatch(toggleMinusAsync());
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <span>{counter}</span>
+        <button onClick={add} >+</button>
+        <button onClick={minus}>-</button>
+        <button onClick={addAsync}>Async + </button>
+        <button onClick={minusAsync}>Async - </button>
+      </div>
   );
 }
 
